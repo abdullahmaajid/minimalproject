@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal - Status Pesanan</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Gaya tambahan untuk konten status pesanan */
+        .order-status-content {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .order-status-content h2 {
+            color: #333;
+        }
+
+        .order-status-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .order-status-table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        .order-status-table th, .order-status-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .order-status-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .order-status-table td {
+            background-color: #fff;
+            color: #666;
+        }
+
+        .order-status-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .order-status-table tr:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><a href="">Minimal</a> </div>
+        <div class="hamburger" id="toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar" id="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Keranjang</a></li>
+                <li><a href="payment.html">Pembayaran</a></li>
+                <li><a href="order_status.html">Status Pesanan</a></li> <!-- Menu Pembayaran -->
+                <div class="login" id="login">
+                    <li><a href="login.html" class="navlogin">Login</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="order-status-content">
+        <h2>Status Pesanan Anda</h2>
+        <p>Berikut adalah status pesanan Anda:</p>
+        <!-- Konten status pesanan akan ditampilkan di sini -->
+        <table class="order-status-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Tanggal Pesanan</th>
+                    <th>Barang</th>
+                    <th>Jumlah</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data pesanan akan dimasukkan di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Anda dapat menambahkan logika JavaScript di sini sesuai kebutuhan
+    </script>
+</body>
+</html>

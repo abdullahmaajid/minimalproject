@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Tambahkan gaya CSS untuk menyesuaikan header */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to E-Commerce Website</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="cart.html">Keranjang</a></li>
+        <li><a href="payment.html">Pembayaran</a></li>
+        <li><a href="order_status.html">Status Pesanan</a></li> <!-- Menu Pembayaran -->
+      </ul>
+    </nav>
+  </header>
+
+  <div class="signup-container">
+    <form id="signupForm">
+      <h2>Sign Up</h2>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      // Menghentikan pengiriman form
+      event.preventDefault();
+
+      // Lakukan validasi sign-up di sini (belum diimplementasikan)
+      // Untuk contoh, saya hanya mengarahkan pengguna kembali ke halaman login
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

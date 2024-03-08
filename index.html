@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Pengelompokan kartu produk */
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        /* Skala kartu produk */
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 500px; /* Lebar kartu produk */
+            height: 700px; /* Tinggi kartu produk */
+            position: relative;
+            margin: 20px;
+            transition: transform 0.3s ease; /* Efek transisi untuk animasi zoom */
+        }
+    
+        .product-card:hover {
+            transform: scale(1.05); /* Skala kartu produk saat dihover */
+        }
+    
+        .product-card img {
+            max-width: 100%;
+            height: 400px; /* Tinggi gambar */
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    
+        .product-details {
+            padding: 20px;
+            height: calc(100% - 460px); /* Sisakan ruang untuk detail produk */
+        }
+    
+        .product-name {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+    
+        .product-description {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+    
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px; /* Posisikan harga di bagian bawah detail */
+        }
+    
+        .add-to-cart {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #A9A9A9;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+    
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><a href="">Minimal</a> </div>
+        <div class="hamburger" id="toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar" id="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Keranjang</a></li>
+                <li><a href="payment.html">Pembayaran</a></li>
+                <li><a href="order_status.html">Status Pesanan</a></li> <!-- Menu Pembayaran -->
+                <div class="login" id="login">
+                    <li><a href="login.html" class="navlogin">Login</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h2>Our Products</h2>
+        <!-- Tambahkan input pencarian -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <button onclick="searchProducts()">Search</button>
+        </div>
+        <div class="products-container">
+            <!-- Product cards will be dynamically added here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Dummy product data (contoh data produk)
+        const products = [
+            { id: 1, name: 'Kursi Makan', price: 10, description: 'Kursi makan dengan desain elegan dan nyaman, cocok untuk menikmati hidangan bersama keluarga', image: 'chairsr.jpg' },
+            { id: 2, name: 'Kursi Bayi', price: 20, description: 'Kursi bayi yang aman dan nyaman, dirancang khusus untuk memberikan kenyamanan dan dukungan pada bayi saat makan atau bermain', image: 'chairkp.jpg' },
+            { id: 3, name: 'Kursi Ruang Tamu', price: 30, description: 'Kursi ruang tamu yang stylish dan fungsional, ideal untuk menyambut tamu dan menciptakan suasana yang nyaman di ruang keluarga', image: 'chairks.jpg' },
+            { id: 4, name: 'Kursi Santai', price: 40, description: 'Kursi santai yang ergonomis dan mengundang, sempurna untuk bersantai setelah seharian sibuk atau membaca buku di sudut yang tenang', image: 'chairrh.jpg' },
+            { id: 5, name: 'Kursi Rebahan', price: 50, description: 'Kursi rebahan yang lembut dan nyaman, cocok untuk bersantai di teras atau ruang tamu sambil menikmati secangkir teh atau kopi', image: 'chairp.jpg' }
+        ];
+
+        // Menampilkan produk pada halaman
+        const productsContainer = document.querySelector('.products-container');
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+
+            const img = document.createElement('img');
+            img.src = product.image;
+            img.alt = product.name;
+
+            const details = document.createElement('div');
+            details.classList.add('product-details');
+
+            const name = document.createElement('h3');
+            name.classList.add('product-name');
+            name.textContent = product.name;
+
+            const description = document.createElement('p');
+            description.classList.add('product-description');
+            description.textContent = product.description;
+
+            const price = document.createElement('p');
+            price.classList.add('product-price');
+            price.textContent = `Price: $${product.price}`;
+
+            const addToCartButton = document.createElement('button');
+            addToCartButton.classList.add('add-to-cart');
+            addToCartButton.innerText = 'Add to Cart';
+            addToCartButton.setAttribute('data-id', product.id);
+
+            details.appendChild(name);
+            details.appendChild(description);
+            details.appendChild(price);
+            productCard.appendChild(img);
+            productCard.appendChild(details);
+            productCard.appendChild(addToCartButton);
+
+            productsContainer.appendChild(productCard);
+
+            // Menambahkan event listener untuk tombol-tombol pada setiap produk
+            addToCartButton.addEventListener('click', function() {
+                // Fungsi untuk menambahkan produk ke keranjang belanja
+                addToCart(product);
+            });
+        });
+
+        // Fungsi untuk menambahkan produk ke keranjang belanja
+        function addToCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cart.findIndex(item => item.id === product.id);
+
+            if (existingProductIndex !== -1) {
+                // Jika produk sudah ada, tingkatkan kuantitasnya
+                cart[existingProductIndex].quantity++;
+            } else {
+                // Jika produk belum ada, tambahkan ke keranjang belanja
+                product.quantity = 1;
+                cart.push(product);
+            }
+
+            // Simpan keranjang belanja ke localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(`${product.name} added to cart`);
+        }
+    </script>
+</body>
+</html>

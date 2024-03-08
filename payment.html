@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS untuk tata letak vertikal */
+        .payment-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Form input alamat */
+        #addressForm {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+            width: 300px; /* Atur lebar form */
+        }
+
+        #addressForm label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #addressForm input {
+            margin-bottom: 20px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Tombol "Bayar" */
+        #payButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #A9A9A9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #payButton:hover {
+            background-color: #a9a9a9;
+        }
+
+        /* Teks total pembayaran */
+        #paymentText {
+            margin-bottom: 10px;
+        }
+
+        /* Gambar QRIS */
+        #qrisImage {
+            margin-top: 20px;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo"><a href="">Minimal</a> </div>
+        <div class="hamburger" id="toggle">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="nav-bar" id="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cart.html">Keranjang</a></li>
+                <li><a href="payment.html">Pembayaran</a></li>
+                <li><a href="order_status.html">Status Pesanan</a></li> <!-- Menu Pembayaran -->
+                <div class="login" id="login">
+                    <li><a href="login.html" class="navlogin">Login</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="payment-content">
+        <!-- Informasi pembayaran dan QRIS akan ditampilkan di sini -->
+        <h2 id="paymentText">Total Pembayaran: $<span id="totalPayment"></span></h2>
+        <p>Silakan lakukan pembayaran dengan menggunakan QRIS di bawah ini:</p>
+        <div id="qrisContainer">
+            <img src="qris.jpg" alt="QRIS Code" id="qrisImage"> <!-- Gambar QRIS -->
+        </div>
+        <br>
+        <!-- Form input untuk alamat -->
+        <form id="addressForm">
+            <label for="fullName">Nama Orang:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Nama Orang">
+            <label for="phoneNumber">Nomor HP:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Nomor Hape">
+            <label for="street">Nama Jalan:</label>
+            <input type="text" id="street" name="street" placeholder="Nama Jalan">
+            <label for="residential">Perumahan atau Nama Tempat:</label>
+            <input type="text" id="residential" name="residential" placeholder="Perumahan atau Nama Tempat">
+            <label for="rt_rw">Keterangan RT/RW:</label>
+            <input type="text" id="rt_rw" name="rt_rw" placeholder="Keterangan RT/RW">
+            <label for="village">Nama Kelurahan atau Desa:</label>
+            <input type="text" id="village" name="village" placeholder="Nama Kelurahan atau Desa">
+            <label for="subdistrict">Nama Kecamatan:</label>
+            <input type="text" id="subdistrict" name="subdistrict" placeholder="Nama Kecamatan">
+            <label for="city">Nama Kota atau Kabupaten:</label>
+            <input type="text" id="city" name="city" placeholder="Nama Kota atau Kabupaten">
+            <label for="province">Nama Provinsi:</label>
+            <input type="text" id="province" name="province" placeholder="Nama Provinsi">
+            <label for="postcode">Kode Pos:</label>
+            <input type="text" id="postcode" name="postcode" placeholder="Kode Pos">
+            <label for="country">Negara:</label>
+            <input type="text" id="country" name="country" placeholder="Negara">
+            <button id="payButton">Bayar</button>
+        </form>
+        <br>
+        <!-- Tombol untuk memeriksa status pesanan -->
+        <button id="checkOrderStatus">Check Order Status</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tambahkan event listener untuk tombol "Check Order Status"
+            document.getElementById('checkOrderStatus').addEventListener('click', function() {
+                // Arahkan langsung ke halaman status pesanan
+                window.location.href = 'order_status.html';
+            });
+        
+            // Ambil total pembayaran dari local storage
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalPayment = 0;
+            const totalPaymentElement = document.getElementById('totalPayment');
+        
+            // Hitung total pembayaran dari item keranjang
+            cartItems.forEach(item => {
+                totalPayment += item.price * item.quantity;
+            });
+        
+            // Tampilkan total pembayaran
+            totalPaymentElement.textContent = `${totalPayment.toFixed(2)}`;
+        
+            // Mendefinisikan fungsi untuk memproses pembayaran menggunakan QRIS
+            function processPayment() {
+                // Memanggil API pembayaran QRIS
+                // Gantilah URL_API dengan URL API pembayaran yang sesuai dari penyedia Anda
+                fetch('URL_API', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Gantilah API_KEY dengan kunci API yang sesuai dari penyedia Anda
+                        'Authorization': 'Bearer API_KEY'
+                    },
+                    body: JSON.stringify({
+                        amount: totalPayment, // Jumlah pembayaran
+                        // Informasi tambahan seperti deskripsi pembayaran, dll., sesuaikan dengan kebutuhan Anda
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Proses tanggapan dari API pembayaran
+                    // Tampilkan QRIS atau tautan pembayaran sesuai dengan tanggapan API
+                    const qrisCode = data.qris; // Ambil QRIS dari tanggapan API
+                    const qrisImage = document.getElementById('qrisImage');
+                    qrisImage.src = qrisCode; // Tampilkan QRIS di gambar HTML
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        
+            // Panggil fungsi untuk memproses pembayaran saat halaman dimuat
+            processPayment();
+        
+            // Tambahkan event listener untuk tombol "Bayar"
+            document.getElementById('payButton').addEventListener('click', function() {
+                // Arahkan ke halaman pembayaran
+                window.location.href = 'payment.html';
+            });
+        });
+    </script>
+</body>
+</html>
