@@ -76,18 +76,22 @@ body {
     margin-bottom: 5px;
   }
   
-  .login-container input,
-  .signup-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-  }
+  .login-container input[type="text"],
+  .signup-container input[type="text"],
+  .login-container input[type="password"],
+  
+  .signup-container input[type="password"] {
+  width: 100%; /* Mengatur lebar input form menjadi 100% dari lebar kontainer */
+  padding: 10px; /* Mengatur padding pada input form */
+  margin-bottom: 10px; /* Mengatur jarak antara input form */
+  box-sizing: border-box; /* Menghitung padding dan border ke dalam total lebar dan tinggi */
+}
   
   .login-container button,
   .signup-container button {
     width: 100%;
     padding: 10px;
-    background-color: #fff;
+    background-color: #000;
     color: #fff;
     border: none;
     cursor: pointer;
