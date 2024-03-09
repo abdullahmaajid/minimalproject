@@ -105,7 +105,7 @@
         <!-- Tambahkan input pencarian -->
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search products...">
-            <button onclick="searchProducts()">Search</button>
+            <button id="searchButton">Search</button>
         </div>
         <div class="products-container">
             <!-- Product cards will be dynamically added here -->
@@ -191,7 +191,7 @@
         // Fungsi untuk mencari produk
         function searchProducts() {
             const searchInput = document.getElementById('searchInput');
-            const searchText = searchInput.value.toLowerCase(); // Mengonversi teks pencarian ke huruf kecil
+            const searchText = searchInput.value.trim().toLowerCase(); // Mengonversi teks pencarian ke huruf kecil dan menghapus spasi awal dan akhir
             const productsContainer = document.querySelector('.products-container');
             const productCards = productsContainer.querySelectorAll('.product-card');
 
@@ -204,7 +204,32 @@
                     card.style.display = 'none'; // Menyembunyikan kartu produk jika nama produk tidak cocok dengan pencarian
                 }
             });
+
+            // Jika input pencarian kosong, tampilkan semua produk
+            if (searchText === '') {
+                productCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+            }
         }
+
+        // Menambahkan event listener untuk memantau perubahan pada input pencarian
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+
+        searchInput.addEventListener('input', function() {
+            searchProducts();
+        });
+
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.keyCode === 13) { // 13 adalah kode untuk tombol "Enter"
+                searchProducts();
+            }
+        });
+
+        searchButton.addEventListener('click', function() {
+            searchProducts();
+        });
     </script>
 </body>
 </html>
