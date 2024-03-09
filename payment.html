@@ -9,63 +9,65 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* CSS untuk tata letak vertikal */
-        .payment-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 20px;
-        }
+.payment-content {
+  display: flex;
+  justify-content: center; /* Pusatkan konten secara horizontal */
+  margin-top: 20px;
+  padding: 0 20px; /* Menambahkan padding agar konten tidak terlalu dekat dengan tepi */
+}
 
-        /* Form input alamat */
-        #addressForm {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-top: 20px;
-            width: 300px; /* Atur lebar form */
-        }
+/* Form input alamat */
+#addressForm {
+  width: 300px; /* Atur lebar form */
+  margin-right: 40px; /* Menambahkan jarak ke kanan */
+}
 
-        #addressForm label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+#addressForm label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-        #addressForm input {
-            margin-bottom: 20px;
-            padding: 8px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+#addressForm input {
+  margin-bottom: 20px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
-        /* Tombol "Bayar" */
-        #payButton {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #A9A9A9;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+/* Informasi pembayaran dan QRIS */
+#paymentDetails {
+  text-align: center;
+  margin-left: 40px; /* Menambahkan jarak ke kiri */
+}
 
-        #payButton:hover {
-            background-color: #a9a9a9;
-        }
+#paymentDetails img {
+  max-width: 200px;
+  margin-top: 20px;
+}
 
-        /* Teks total pembayaran */
-        #paymentText {
-            margin-bottom: 10px;
-        }
+/* Teks total pembayaran */
+#paymentText {
+  margin-bottom: 10px;
+}
 
-        /* Gambar QRIS */
-        #qrisImage {
-            margin-top: 20px;
-            max-width: 200px;
-        }
+/* Tombol untuk memeriksa status pesanan */
+#checkOrderStatus, #payButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #A9A9A9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#checkOrderStatus:hover, #payButton:hover {
+  background-color: #a9a9a9;
+}
+
     </style>
 </head>
 <body>
@@ -90,42 +92,52 @@
     </header>
 
     <div class="payment-content">
-        <!-- Informasi pembayaran dan QRIS akan ditampilkan di sini -->
-        <h2 id="paymentText">Total Pembayaran: $<span id="totalPayment"></span></h2>
-        <p>Silakan lakukan pembayaran dengan menggunakan QRIS di bawah ini:</p>
-        <div id="qrisContainer">
-            <img src="qris.jpg" alt="QRIS Code" id="qrisImage"> <!-- Gambar QRIS -->
-        </div>
-        <br>
         <!-- Form input untuk alamat -->
-        <form id="addressForm">
-            <label for="fullName">Nama Orang:</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Nama Orang">
-            <label for="phoneNumber">Nomor HP:</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Nomor Hape">
-            <label for="street">Nama Jalan:</label>
-            <input type="text" id="street" name="street" placeholder="Nama Jalan">
-            <label for="residential">Perumahan atau Nama Tempat:</label>
-            <input type="text" id="residential" name="residential" placeholder="Perumahan atau Nama Tempat">
-            <label for="rt_rw">Keterangan RT/RW:</label>
-            <input type="text" id="rt_rw" name="rt_rw" placeholder="Keterangan RT/RW">
-            <label for="village">Nama Kelurahan atau Desa:</label>
-            <input type="text" id="village" name="village" placeholder="Nama Kelurahan atau Desa">
-            <label for="subdistrict">Nama Kecamatan:</label>
-            <input type="text" id="subdistrict" name="subdistrict" placeholder="Nama Kecamatan">
-            <label for="city">Nama Kota atau Kabupaten:</label>
-            <input type="text" id="city" name="city" placeholder="Nama Kota atau Kabupaten">
-            <label for="province">Nama Provinsi:</label>
-            <input type="text" id="province" name="province" placeholder="Nama Provinsi">
-            <label for="postcode">Kode Pos:</label>
-            <input type="text" id="postcode" name="postcode" placeholder="Kode Pos">
-            <label for="country">Negara:</label>
-            <input type="text" id="country" name="country" placeholder="Negara">
-            <button id="payButton">Bayar</button>
-        </form>
-        <br>
-        <!-- Tombol untuk memeriksa status pesanan -->
-        <button id="checkOrderStatus">Check Order Status</button>
+        <!-- Form input untuk alamat -->
+<!-- Form input untuk alamat -->
+<form id="addressForm" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <div style="width: 48%;">
+      <label for="fullName">Nama Orang:</label>
+      <input type="text" id="fullName" name="fullName" placeholder="Nama Orang">
+      <label for="phoneNumber">Nomor HP:</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Nomor Hape">
+      <label for="street">Nama Jalan:</label>
+      <input type="text" id="street" name="street" placeholder="Nama Jalan">
+      <label for="residential">Perumahan atau Nama Tempat:</label>
+      <input type="text" id="residential" name="residential" placeholder="Perumahan atau Nama Tempat">
+      <label for="rt_rw">Keterangan RT/RW:</label>
+      <input type="text" id="rt_rw" name="rt_rw" placeholder="Keterangan RT/RW">
+      <label for="village">Nama Kelurahan atau Desa:</label>
+      <input type="text" id="village" name="village" placeholder="Nama Kelurahan atau Desa">
+  </div>
+  <div style="width: 48%;">
+      <label for="subdistrict">Nama Kecamatan:</label>
+      <input type="text" id="subdistrict" name="subdistrict" placeholder="Nama Kecamatan">
+      <label for="city">Nama Kota atau Kabupaten:</label>
+      <input type="text" id="city" name="city" placeholder="Nama Kota atau Kabupaten">
+      <label for="province">Nama Provinsi:</label>
+      <input type="text" id="province" name="province" placeholder="Nama Provinsi">
+      <label for="postcode">Kode Pos:</label>
+      <input type="text" id="postcode" name="postcode" placeholder="Kode Pos">
+      <label for="country">Negara:</label>
+      <input type="text" id="country" name="country" placeholder="Negara">
+  </div>
+  <button id="payButton" style="width: 100%;">Bayar</button>
+</form>
+
+
+
+        <!-- Informasi pembayaran dan QRIS -->
+        <div id="paymentDetails">
+            <h2 id="paymentText">Total Pembayaran: $<span id="totalPayment"></span></h2>
+            <p>Silakan lakukan pembayaran dengan menggunakan QRIS di bawah ini:</p>
+            <div id="qrisContainer">
+                <img src="qris.jpg" alt="QRIS Code" id="qrisImage"> <!-- Gambar QRIS -->
+            </div>
+            <br>
+            <!-- Tombol untuk memeriksa status pesanan -->
+            <button id="checkOrderStatus">Check Order Status</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
