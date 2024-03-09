@@ -187,6 +187,24 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             console.log(`${product.name} added to cart`);
         }
+
+        // Fungsi untuk mencari produk
+        function searchProducts() {
+            const searchInput = document.getElementById('searchInput');
+            const searchText = searchInput.value.toLowerCase(); // Mengonversi teks pencarian ke huruf kecil
+            const productsContainer = document.querySelector('.products-container');
+            const productCards = productsContainer.querySelectorAll('.product-card');
+
+            // Menghapus produk yang tidak sesuai dengan pencarian
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase(); // Mengambil teks nama produk
+                if (productName.includes(searchText)) {
+                    card.style.display = 'block'; // Menampilkan kartu produk jika nama produk cocok dengan pencarian
+                } else {
+                    card.style.display = 'none'; // Menyembunyikan kartu produk jika nama produk tidak cocok dengan pencarian
+                }
+            });
+        }
     </script>
 </body>
 </html>
