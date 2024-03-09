@@ -36,6 +36,26 @@
     nav ul li a:hover {
       text-decoration: underline;
     }
+
+    /* Gaya tombol Sign Up */
+    button {
+      background-color: #4CAF50; /* Warna hijau */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease; /* Menambahkan transisi warna teks */
+    }
+
+    button:hover,
+    button:focus { /* Menambahkan gaya ketika tombol mendapatkan fokus */
+      background-color: #45a049; /* Warna hijau yang sedikit lebih gelap saat hover */
+    }
+
+    button:focus {
+      outline: none; /* Menghapus garis fokus bawaan browser */
+    }
   </style>
 </head>
 <body>
@@ -70,7 +90,7 @@
       event.preventDefault();
 
       // Lakukan validasi sign-up di sini (belum diimplementasikan)
-      // Untuk contoh, saya hanya mengarahkan pengguna kembali ke halaman login
+      // Redirect ke halaman login setelah sign-up berhasil
       window.location.href = 'login.html';
     });
   </script>
